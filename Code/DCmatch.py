@@ -27,6 +27,7 @@ class Match:
 
     def probJoint(self, homeGoals, awayGoals):
         return self.tau(homeGoals, awayGoals) * ((self.lambda_**homeGoals * math.exp(-self.lambda_)) / (math.factorial(homeGoals))) * ((self.mu**awayGoals * math.exp(-self.mu)) / (math.factorial(awayGoals)))
+    
     @staticmethod
     def print2Darray(array):
         for i in range(len(array)):
@@ -47,9 +48,8 @@ class Match:
                 thisLine.append(round(self.probJoint(i, j), ndigits = 5))
             scorelineProbs.append(thisLine)
 
-        return scorelineProbs
+        return self.normaliseProbMatrix(scorelineProbs)
     
-
     def simulateResult(self):
         scorelineProbs = self.getScoreMatrix()
         scorelineProbs = self.normaliseProbMatrix(scorelineProbs)
