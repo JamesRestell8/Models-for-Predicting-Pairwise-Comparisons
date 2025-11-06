@@ -25,6 +25,18 @@ class Match:
             return 1 - self.rho
         return 1
 
+    @staticmethod
+    def tauFunc(lamd, mu, rho, x, y) -> float:
+        if x == 0 and y == 0:
+            return 1 - lamd * mu * rho
+        if x == 0 and y == 1:
+            return 1 + lamd * rho
+        if x == 1 and y == 0:
+            return 1 + mu * rho
+        if x == 1 and y == 1:
+            return 1 - rho
+        return 1
+
     def probJoint(self, homeGoals, awayGoals):
         return self.tau(homeGoals, awayGoals) * ((self.lambda_**homeGoals * math.exp(-self.lambda_)) / (math.factorial(homeGoals))) * ((self.mu**awayGoals * math.exp(-self.mu)) / (math.factorial(awayGoals)))
     
