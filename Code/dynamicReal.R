@@ -144,3 +144,16 @@ team_strengths <- data.frame(
 ) %>% arrange(desc(Attack))
 
 print(team_strengths)
+
+library(ggplot2)
+library(ggrepel)
+
+ggplot(team_strengths, aes(x = Defence, y = Attack)) +
+  geom_point(size = 2, color = "blue") +
+  geom_text_repel(aes(label = Team), size = 3, max.overlaps = 20) +
+  scale_x_reverse() +
+  labs(title = "Team Attack vs Defence Strengths",
+       x = "Defence Strength",
+       y = "Attack Strength") +
+  theme_minimal()
+
